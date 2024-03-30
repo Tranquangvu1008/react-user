@@ -58,14 +58,13 @@ function App() {
           }
           return item;
         })
-
         setListUserInfo(newUpdate);
         setModeEdit(false)
         reset()
       } else {
         const newId = listUserInfo.reduce((maxId, item) => Math.max(item.id, maxId), 0) + 1;
         setListUserInfo([...listUserInfo, { id: newId, ...data }])
-        // reset()
+        reset()
       }
     }
   }
@@ -172,7 +171,7 @@ function App() {
                   <tr key={item.id} className={`${item.id % 2 !== 0 ? "bg-white" : "bg-[#f9fafb]"}`}>
                     <td className="px-8 py-2 break-words">{item.fullName}</td>
                     <td className="px-8 py-2 break-words">{item.email}</td>
-                    <td className="px-8 py-2 break-words">{item.address} {item.city}</td>
+                    <td className="px-8 py-2 break-words">{item.address}, {item.city}</td>
                     <td className="px-8 py-2 break-words">{item.country}</td>
                     <td className="px-8 py-2 break-words ">
                       <button className="text-blue-600 pr-2" onClick={() => showItemUpdate(item.id)}>Edit</button>
@@ -184,6 +183,7 @@ function App() {
             </table>
           </div>
         </section>
+        {/*Paging*/}
         <div className="flex gap-3 items-center justify-end">
           <div>
             <p>Showing <strong>{currentRecords.length}</strong> Entries</p>
