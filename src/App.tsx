@@ -65,7 +65,7 @@ function App() {
       } else {
         const newId = listUserInfo.reduce((maxId, item) => Math.max(item.id, maxId), 0) + 1;
         setListUserInfo([...listUserInfo, { id: newId, ...data }])
-        // reset()
+        reset()
       }
     }
   }
