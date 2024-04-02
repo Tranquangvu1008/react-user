@@ -88,7 +88,6 @@ function App() {
     }
   }
 
-
   return (
     <div className='bg-[#f3f4f6] h-screen'>
       <div className="flex flex-col p-10 gap-5">
@@ -134,15 +133,14 @@ const HeaderSection = () => {
 
 const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit }: any) => {
   return (
-
-    <section className="bg-white px-10 py-5 flex md:flex-row flex-col gap-[10%] shadow-lg">
+    <section className="bg-white sm:px-10 px-5 py-5 flex md:flex-row flex-col md:gap-[10%] gap-5 shadow-lg">
       <div className="">
         <h3 className='font-medium text-lg'>Personal Details</h3>
         <h6 className="'text-black font-normal">Please fill out all the fields.</h6>
       </div>
       <div className="flex-1">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <label htmlFor="fullName">Full Name</label>
             <input {...register("fullName", { required: true, maxLength: 30 })} type="text" id="fullName"
               className="bg-[#f9fafb] pl-4 py-2 rounded-md border-[1px] border-gray-300 border-solid" />
@@ -151,7 +149,7 @@ const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit }: any
               <p className='mt-1 text-red-500'>Full name cannot exceed 30 characters</p>
             )}
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <label htmlFor="email">Email Address</label>
             <input {...register("email", { required: true, maxLength: 30 })} type="email"
               className="bg-[#f9fafb] pl-4 py-2 rounded-md border-[1px] border-gray-300 border-solid" />
@@ -160,14 +158,14 @@ const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit }: any
               <p className='mt-1 text-red-500'>Email cannot exceed 30 characters</p>
             )}
           </div>
-          <div className="flex sm:flex-row flex-col gap-4">
-            <div className="flex flex-col flex-[2]">
+          <div className="flex sm:flex-row flex-col sm:gap-4 gap-2">
+            <div className="flex flex-col sm:flex-[2] w-full self-baseline gap-1">
               <label htmlFor="address">Address / Street</label>
               <input {...register("address", { required: true })} type="text"
                 className="bg-[#f9fafb] pl-4 py-2 rounded-md border-[1px] border-gray-300 border-solid" />
               {errors?.address?.type === "required" && <p className='mt-1 text-red-400'>* This field is required</p>}
             </div>
-            <div className="flex flex-col flex-[1]">
+            <div className="flex flex-col sm:flex-[1] w-full self-baseline gap-1">
               <label htmlFor="city">City</label>
               <input {...register("city", { required: true })} type="text"
                 className="bg-[#f9fafb] pl-4 py-2 rounded-md border-[1px] border-gray-300 border-solid" />
@@ -175,7 +173,7 @@ const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit }: any
 
             </div>
           </div>
-          <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1 gap-1">
             <label htmlFor="country">Country / region</label>
             <select
               {...register("country", { required: "* Select one option" })}
@@ -185,7 +183,7 @@ const FormSection = ({ register, errors, modeEdit, handleSubmit, onSubmit }: any
               <option value="Canada">Canada</option>
               <option value="America">America</option>
             </select>
-            {errors.country && <p className="mt-1 text-red-500">{errors.country.message}</p>}
+            {errors.country && <p className="mt-1 text-red-400">{errors.country.message}</p>}
           </div>
           <div className="text-right">
             <button className="inline-block font-bold text-white bg-[#3b82f6] py-2 px-4 rounded-lg">{modeEdit ? 'Edit' : 'Submit'}</button>
@@ -204,18 +202,18 @@ const TableSection = ({ headers, currentRecords, deleteItem, showItemUpdate }: a
           <thead>
             <tr>
               {headers.map((header: any, index: number) => (
-                <th key={index} className="text-left px-8 mx-8 py-2">{header}</th>
+                <th key={index} className="text-left px-8 mx-8 py-2 w-[200px]">{header}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {currentRecords.length > 0 ? currentRecords.map((item: any) => (
               <tr key={item.id} className={`${item.id % 2 !== 0 ? "bg-white" : "bg-[#f9fafb]"}`}>
-                <td className="px-8 py-2 break-words">{item.fullName}</td>
-                <td className="px-8 py-2 break-words">{item.email}</td>
-                <td className="px-8 py-2 break-words">{item.address}, {item.city}</td>
-                <td className="px-8 py-2 break-words">{item.country}</td>
-                <td className="px-8 py-2 break-words ">
+                <td className="px-8 py-2 break-words w-[200px]">{item.fullName}</td>
+                <td className="px-8 py-2 break-words w-[200px]">{item.email}</td>
+                <td className="px-8 py-2 break-words w-[200px]">{item.address}, {item.city}</td>
+                <td className="px-8 py-2 break-words w-[200px]">{item.country}</td>
+                <td className="px-8 py-2 break-words w-[200px]">
                   <button className="text-blue-600 pr-2" onClick={() => showItemUpdate(item.id)}>Edit</button>
                   <button className="text-red-600" onClick={() => deleteItem(item.id)}>Delete</button>
                 </td>
@@ -235,19 +233,18 @@ const PaginationSection = ({ goToPrevPage, goToNextPage, currentRecords }: any) 
         <p>Showing <strong>{currentRecords.length}</strong> Entries</p>
       </div>
       <div className="flex">
-        <button className="flex gap-1 items-center bg-[#1f40af] text-white px-2 rounded-l-lg" onClick={goToPrevPage}>
+        <button className="flex flex-col sm:flex-row gap-1 items-center bg-[#1f40af] text-white px-2 rounded-l-lg" onClick={goToPrevPage}>
           <img src={arrowLeft} alt="" className="w-8 text-white" />
           <p>Prev</p>
         </button>
         <div className="w-[1px] bg-black" />
-        <button className="flex gap-1 items-center bg-[#1f40af] text-white px-2 rounded-r-lg" onClick={goToNextPage}>
+        <button className="flex flex-col sm:flex-row gap-1 items-center bg-[#1f40af] text-white px-2 rounded-l-lg" onClick={goToNextPage}>
           <p>Next</p>
           <img src={arrowRight} alt="" className="w-8" />
         </button>
       </div>
     </section>
   );
-  // JSX for pagination section
 };
 
 export default App
